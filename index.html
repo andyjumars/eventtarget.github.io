@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>事件目標對象</title>
+    <style type="text/css">
+        .item {
+            width: 100px;
+            height: 80px;
+            background-color:lightblue;
+            margin:50px 10px;
+        }
+    </style>
+</head>
+<body>
+    <ul id="box">
+        <li class="item">1</li>
+        <li class="item">2</li>
+
+    </ul>
+    <script type="text/javascript">
+        // currentTarget target srcElement
+        var box = document.getElementById('box');
+        /*
+        //1.currentTarget 屬性返回事件當前所在節點，正在執行的監聽函數所綁定的節點
+        box.onclick = function (e){
+            e = e || window.event;
+            //console.log(e);
+            console.log(e.currentTarget);
+            var items = document.getElementByTagName('li');
+            items[0].innerHTML = e.currentTarget;
+        }
+        */
+        //2.target屬性返回的是事件的實際目標對象
+        //注意：target屬性 ie8不支持
+
+        /* box.onclick = function(e){
+            e = e || window.event;
+            console.log(e.target);
+            console.log(e.target === this);
+
+            //this對象跟e.currentTarget 屬性是一樣的
+            console.log(e.currentTarget === this);
+
+
+        }*/
+
+        3.//srcElement跟target功能是一致的,FF火狐低版本瀏覽器不支持
+        box.onclick = function(e){
+                e = e || window.event;
+                var target = e.target || e.srcElement;
+                target.style.backgroundColor = 'red';
+        }
+        box.onmouseout = function(e){
+            e = e || window.event;
+            var target = e.target  || e.srcElement;
+            target.style.backgroundColor = 'lightblue';
+        }
+    </script>
+</body>
+</html>
